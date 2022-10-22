@@ -61,4 +61,9 @@ class AdminController{
         }
     }
 
+    public static function update()
+    {
+        
+    }
+
 }
