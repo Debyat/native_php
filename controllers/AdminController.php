@@ -3,15 +3,12 @@
 namespace Controllers;
 
 use Models\Admin;
-use Core\DB;
-
-class AdminController{
-
+class AdminController extends Controller
+{
     public static function index()
     {
         session_start();
         $date = date("Y", strtotime("+ 8 HOURS"));
-        $db = new DB();
 
         $sections = [
             'maternity',
@@ -24,7 +21,7 @@ class AdminController{
         ];
         
         foreach ($sections as $value) {
-            $holder = $db->connect->query("SELECT COUNT(*) as total FROM `$value` WHERE `year` = '$date' GROUP BY `patient_id`");
+            $holder = self::query("SELECT COUNT(*) as total FROM `$value` WHERE `year` = '$date' GROUP BY `patient_id`");
             $data[$value] = $holder->fetch_array();
         }
 

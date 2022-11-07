@@ -3,7 +3,6 @@
 namespace Models;
 
 use Core\DB;
-
 class Admin{
     
     /**
@@ -17,6 +16,7 @@ class Admin{
      *   ];
      * 
      * @param Array $values
+     * 
      * Adding admin
      */
     public static function add($values)
@@ -54,11 +54,13 @@ class Admin{
      * 
      * @param Array $values
      * @param Admin $id
+     * 
      * update admin
      */
     public static function update($values, $id)
     {
         $db = new DB();
+
         foreach ($values as $key => $value) {
             $DATA[$key] = $value;
         }
@@ -82,7 +84,9 @@ class Admin{
     public static function get()
     {
         $db = new DB();
+
         $query = "SELECT * FROM `admin`";
+
         $response = $db->connect->query($query);
 
         return $response->fetch_array();
@@ -94,7 +98,9 @@ class Admin{
     public static function first()
     {
         $db = new DB();
+
         $query = "SELECT * FROM `admin` LIMIT 1";
+
         $response = $db->connect->query($query);
 
         return $response->fetch_array();
@@ -103,12 +109,15 @@ class Admin{
     /**
      * @param String $col
      * @param String/Int $val
+     * 
      * getting admin with condition
      */
     public static function where($col, $val)
     {
         $db = new DB();
+
         $query = "SELECT * FROM `admin` WHERE $col = $val";
+
         $response = $db->connect->query($query);
 
         return $response->fetch_array();
@@ -116,16 +125,24 @@ class Admin{
 
     /**
      * @param String $query
+     * 
      * select raw
      */
     public static function selectRaw($query)
     {
         $db = new DB();
+
         $response = $db->connect->query($query);
 
         return $response->fetch_array();
     }
     
+    /**
+     * @param String $username
+     * @param String $password
+     * 
+     * check user to login
+     */
     public static function auth($username, $password)
     {
         $db = new DB();
