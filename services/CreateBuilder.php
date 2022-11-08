@@ -18,13 +18,58 @@ class CreateBuilder implements Builder
     private $model;
 
     /**
+     * var string
+     */
+    private $query;
+
+    public function __construct()
+    {
+        $this->setQuery();
+    }
+
+    /**
+     * Setting default query
+     * 
+     */
+    public function setQuery()
+    {
+        return $this->query = "SELECT * FROM `$this->model`";
+    }
+
+    /**
      * Setting table name
      * 
      * @param string $model
      */
-    public function setModel($model): void
+    public function setModel($model)
     {
         $this->model = $model;
+
+        return $this->model;
+    }
+
+    /**
+     * Setting table name
+     * 
+     * @param string $model
+     */
+    public function where($col, $val)
+    {
+        $this->query = $this->query."WHERE `$col` = `$val`";
+
+        return $this->query;
+    }
+
+    /**
+     * Setting table name
+     * 
+     * @param string $model
+     */
+    public function orderBy($col)
+    {
+        $this->query = $this->query."ORDER BY `$col`";
+
+        return $this->query($this->query);
     }
 
     /**
@@ -33,9 +78,7 @@ class CreateBuilder implements Builder
      */
     public function get()
     {
-        $query = "SELECT * FROM `$this->model`";
-        
-        return $this->query($query);
+        return $this->query($this->query);
     }
 
     /**
@@ -44,9 +87,7 @@ class CreateBuilder implements Builder
      */
     public function all()
     {
-        $query = "SELECT * FROM `$this->model`";
-        
-        return $this->query($query);
+        return $this->query($this->query);
     }
 
     /**
@@ -55,9 +96,9 @@ class CreateBuilder implements Builder
      */
     public function first()
     {
-        $query = "SELECT * FROM `$this->model` LIMIT 1";
+        $this->query = $this->query."LIMIT 1";
 
-        return $this->query($query);
+        return $this->query($this->query);
     }
     
     /**
@@ -106,4 +147,5 @@ class CreateBuilder implements Builder
 
         return $this->query($query);
     }
+    
 }

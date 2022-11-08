@@ -9,7 +9,7 @@ interface Builder {
      * 
      * @param String $model
      */
-    public function setModel($model) : void;
+    public function setModel($model);
 
     /**
      * Get all data
@@ -27,9 +27,26 @@ interface Builder {
     public function first();
 
     /**
+     * Condition query
+     */
+    public function where($val, $col);
+
+    /**
+     * Condition query
+     */
+    public function orderBy($col);
+
+    /**
      * Adding new data
      * 
      * @param array $values
      */
     public function add($values);
+
+    /**
+     * Update specific data
+     * 
+     * @param array $values
+     */
+    public function update($values, $id);
 }
